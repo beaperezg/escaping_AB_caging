@@ -1,0 +1,37 @@
+[project]
+name = "driven-flatbands"
+version = "0.1.0"
+description = "Code to reproduce the figures of 'Escaping Aharonov-Bohm caging' (arXiv:2511.20255)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.12",
+    "matplotlib>=3.8",
+    "qutip>=5.2,<6",
+    "joblib>=1.3",
+    "tqdm>=4.66",
+    "cython>=3.3.0",
+    "filelock>=4.0.12",
+    "setuptools>=84.0.0",
+]
+
+[dependency-groups]
+# Tools to open and run the notebooks (installed by default with `uv sync`)
+dev = [
+    "jupyterlab>=4.0",
+    "ipykernel>=6.29",
+    "ipywidgets>=8.1",
+    "nbconvert>=7.16",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# The modules in Source/ are installed as top-level modules (import diamond_chain, two_particles, ...)
+[tool.hatch.build.targets.wheel]
+only-include = ["Source"]
+
+[tool.hatch.build.targets.wheel.sources]
+"Source" = ""
